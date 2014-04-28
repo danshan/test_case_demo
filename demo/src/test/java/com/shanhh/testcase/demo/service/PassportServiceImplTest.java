@@ -20,19 +20,32 @@ public class PassportServiceImplTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private PassportService passportService;
 
-    @Test(description = "register a passport, but username is null", expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "^username cannot be null\\.")
+    @Test(description = "register a passport, but username is null",
+            expectedExceptions = IllegalArgumentException.class,
+            expectedExceptionsMessageRegExp = "^username cannot be null\\.")
     public void testRegister_UsenrameNull() {
         passportService.register(null, "password");
     }
 
-    @Test(description = "register a passport, but password is null", expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "^username cannot be null\\.")
+    @Test(description = "register a passport, but password is null",
+            expectedExceptions = IllegalArgumentException.class,
+            expectedExceptionsMessageRegExp = "^username cannot be null\\.")
     public void testRegister_PasswordNull() {
         passportService.register(null, "password");
     }
 
-    @Test(description = "register a passport, but username already exists", expectedExceptions = IllegalStateException.class, expectedExceptionsMessageRegExp = "^username already exists,.*")
+    @Test(description = "register a passport, but username already exists",
+            expectedExceptions = IllegalStateException.class,
+            expectedExceptionsMessageRegExp = "^username already exists,.*")
     public void testRegister_UsernameExist() {
         passportService.register("exist@vipshop.com", "password");
+    }
+
+    @Test(description = "register a passport, but username format incorrect",
+            expectedExceptions = IllegalArgumentException.class,
+            expectedExceptionsMessageRegExp = "^username format incorrect.*")
+    public void testRegister_UsernameFormatIncorrect() {
+        passportService.register("incorrect_username", "password");
     }
 
     @Test(description = "register a passport")

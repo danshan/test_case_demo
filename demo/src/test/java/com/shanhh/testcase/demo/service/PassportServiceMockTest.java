@@ -39,7 +39,9 @@ public class PassportServiceMockTest {
         reset(passportRepository);
     }
 
-    @Test(description = "register a passport, but username already exists", expectedExceptions = IllegalStateException.class, expectedExceptionsMessageRegExp = "^username already exists,.*")
+    @Test(description = "register a passport, but username already exists",
+            expectedExceptions = IllegalStateException.class,
+            expectedExceptionsMessageRegExp = "^username already exists,.*")
     public void testRegister_UsernameExist() {
         String username = UUID.randomUUID().toString() + "@vipshop.com";
 
@@ -61,7 +63,8 @@ public class PassportServiceMockTest {
     }
 
 
-    @Test(description = "register a passport, but throw an sqlexception", expectedExceptions = SQLException.class)
+    @Test(description = "register a passport, but throw an sqlexception",
+            expectedExceptions = SQLException.class)
     public void testRegister_Failed() {
         String username = UUID.randomUUID().toString() + "@vipshop.com";
         String password = "password";
